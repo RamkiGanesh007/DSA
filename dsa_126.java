@@ -47,14 +47,20 @@ public class dsa_126 {
     }
 
     //Pending Recursion solution
-    void reverseRecursive(Node ptr,Node prev)
+    Node reverseRecursive(Node ptr)
     {
         if(ptr==null)
         {
-            return;
+            return null;  
         }
-        reverseRecursive(ptr.next,ptr);
-        ptr.next=prev;
+        if(ptr.next==null)
+        {
+            return ptr;
+        }
+        Node newnode=reverseRecursive(ptr.next);
+        ptr.next.next=ptr;
+        ptr.next=null;
+        return newnode;
     }
 
     void display()
@@ -79,7 +85,7 @@ public class dsa_126 {
         k.add(6);
         k.reverseIterative();
         k.display();
-        k.reverseRecursive(k.head,null);
+        k.head=k.reverseRecursive(k.head);
         k.display();
     }
 }
